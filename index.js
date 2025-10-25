@@ -41,6 +41,9 @@ app.post('/api/search', async (req, res) => {
     
     const searchData = await searchResponse.json();
     
+    // DEBUG: Mostrar resposta completa da API
+    console.log('📦 Resposta FatSecret Search:', JSON.stringify(searchData, null, 2));
+    
     // 3. Se encontrou, buscar detalhes
     if (searchData.foods && searchData.foods.food && searchData.foods.food.length > 0) {
       const food = searchData.foods.food[0];
@@ -88,14 +91,20 @@ app.post('/api/search', async (req, res) => {
       return res.json(resultado);
     } else {
       console.log(`❌ Não encontrado na FatSecret`);
-      return res.json({ encontrado: false });
+      console.log('📦 Resposta vazia ou inválida:', JSON.stringify(searchData, null, 2));
+      return res.json({ 
+        encontrado: false,
+        debug_api_response: searchData  // Para debug
+      });
     }
     
   } catch (error) {
     console.error('❌ Erro:', error.message);
+    console.error('📦 Stack:', error.stack);
     return res.status(500).json({ 
       error: error.message,
-      encontrado: false
+      encontrado: false,
+      debug_error_stack: error.stack
     });
   }
 });
