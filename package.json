@@ -1,0 +1,15 @@
+{
+  "name": "fatsecret-proxy",
+  "version": "1.0.0",
+  "description": "Proxy para FatSecret API - n8n Bot Nutricional",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
